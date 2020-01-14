@@ -8,24 +8,17 @@ let graphqlQuery;
 let modelsUtils;
 
 const postModel = {
-  attributes: [
-    {
-      name: 'name',
-      params: {
-        appearance: {
-          WYSIWYG: false,
-        },
-        multiple: false,
-        type: 'string',
-      },
+  attributes: {
+    name: {
+      type: 'richtext',
     },
-    {
-      name: 'bigint',
-      params: {
-        type: 'biginteger',
-      },
+    bigint: {
+      type: 'biginteger',
     },
-  ],
+    nullable: {
+      type: 'string',
+    },
+  },
   connection: 'default',
   name: 'post',
   description: '',
@@ -47,15 +40,15 @@ describe('Test Graphql API End to End', () => {
 
     modelsUtils = createModelsUtils({ rq });
 
-    await modelsUtils.createModels([postModel]);
+    await modelsUtils.createContentTypes([postModel]);
   }, 60000);
 
-  afterAll(() => modelsUtils.deleteModels(['post']), 60000);
+  afterAll(() => modelsUtils.deleteContentTypes(['post']), 60000);
 
   describe('Test CRUD', () => {
     const postsPayload = [
-      { name: 'post 1', bigint: 1316130638171 },
-      { name: 'post 2', bigint: 1416130639261 },
+      { name: 'post 1', bigint: 1316130638171, nullable: 'value' },
+      { name: 'post 2', bigint: 1416130639261, nullable: null },
     ];
     let data = {
       posts: [],
@@ -69,6 +62,7 @@ describe('Test Graphql API End to End', () => {
               post {
                 name
                 bigint
+                nullable
               }
             }
           }
@@ -100,6 +94,7 @@ describe('Test Graphql API End to End', () => {
               id
               name
               bigint
+              nullable
             }
           }
         `,
@@ -126,6 +121,7 @@ describe('Test Graphql API End to End', () => {
               id
               name
               bigint
+              nullable
             }
           }
         `,
@@ -147,6 +143,7 @@ describe('Test Graphql API End to End', () => {
               id
               name
               bigint
+              nullable
             }
           }
         `,
@@ -168,6 +165,7 @@ describe('Test Graphql API End to End', () => {
               id
               name
               bigint
+              nullable
             }
           }
         `,
@@ -229,13 +227,25 @@ describe('Test Graphql API End to End', () => {
       ],
       [
         {
-          name_in: ['post 1', 'post 2'],
+          name_in: ['post 1', 'post 2', 'post 3'],
         },
         postsPayload,
       ],
       [
         {
           name_nin: ['post 2'],
+        },
+        [postsPayload[0]],
+      ],
+      [
+        {
+          nullable_null: true,
+        },
+        [postsPayload[1]],
+      ],
+      [
+        {
+          nullable_null: false,
         },
         [postsPayload[0]],
       ],
@@ -246,6 +256,7 @@ describe('Test Graphql API End to End', () => {
             posts(where: $where) {
               name
               bigint
+              nullable
             }
           }
         `,
@@ -266,7 +277,9 @@ describe('Test Graphql API End to End', () => {
 
       // all expected values are in the result
       expected.forEach(expectedPost => {
-        expect(res.body.data.posts).toEqual(expect.arrayContaining([expectedPost]));
+        expect(res.body.data.posts).toEqual(
+          expect.arrayContaining([expectedPost])
+        );
       });
     });
 
@@ -278,6 +291,7 @@ describe('Test Graphql API End to End', () => {
               id
               name
               bigint
+              nullable
             }
           }
         `,
@@ -341,6 +355,7 @@ describe('Test Graphql API End to End', () => {
             mutation deletePost($input: deletePostInput) {
               deletePost(input: $input) {
                 post {
+                  id
                   name
                   bigint
                 }
@@ -357,6 +372,15 @@ describe('Test Graphql API End to End', () => {
         });
 
         expect(res.statusCode).toBe(200);
+        expect(res.body).toMatchObject({
+          data: {
+            deletePost: {
+              post: {
+                id: post.id,
+              },
+            },
+          },
+        });
       }
     });
   });

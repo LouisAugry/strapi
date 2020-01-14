@@ -1,16 +1,17 @@
 const sqlite = {
-  connector: 'strapi-hook-bookshelf',
+  connector: 'bookshelf',
   settings: {
     client: 'sqlite',
     filename: '.tmp/data.db',
   },
   options: {
+    // debug: true,
     useNullAsDefault: true,
   },
 };
 
 const postgres = {
-  connector: 'strapi-hook-bookshelf',
+  connector: 'bookshelf',
   settings: {
     client: 'postgres',
     database: 'strapi',
@@ -22,8 +23,21 @@ const postgres = {
   options: {},
 };
 
+const mysql = {
+  connector: 'bookshelf',
+  settings: {
+    client: 'mysql',
+    database: 'strapi',
+    username: 'strapi',
+    password: 'strapi',
+    port: 3306,
+    host: 'localhost',
+  },
+  options: {},
+};
+
 const mongo = {
-  connector: 'strapi-hook-mongoose',
+  connector: 'mongoose',
   settings: {
     database: 'strapi',
     username: 'root',
@@ -35,6 +49,7 @@ const mongo = {
 };
 
 const db = {
+  mysql,
   sqlite,
   postgres,
   mongo,

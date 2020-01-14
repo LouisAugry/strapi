@@ -66,7 +66,7 @@ cd /path/to/the/project
 npm run setup
 ```
 
-::: note
+::: tip
 To display the build logs use the --debug option `npm run setup --debug`.
 :::
 
@@ -210,7 +210,7 @@ Amazon calls cloud storage services **S3**. You create a **bucket**, which holds
 1. Navigate to the `Amazon S3`. In the top menu, click on `Services` and do a search for `s3`, click on `Scalable storage in the cloud`.
 2. Click on the blue `Create bucket` button:
 
-- Give you bucket a unqiue name, under **Bucket name**, e.g. `my-project-name-images`.
+- Give your bucket a unique name, under **Bucket name**, e.g. `my-project-name-images`.
 - Select the most appropriate region, under **Region**, e.g. `EU (Paris)` or `US East (N. Virgina)`.
 - Click `Next`.
 - Configure any appropriate options for your project in the **Configure Options** page, and click `next`.
@@ -416,7 +416,7 @@ Ensure you are logged in as a **non-root** user. You will install **PM2** global
 npm install pm2@latest -g
 ```
 
-Now, you will need to configure a `ecosystem.config.js` file. This file will set `env` variables that connect Strapi to your database. It will also be used to restart your project whenever any changes are made to files within the Strapi file system itself (such as when an update arrived from Github).You can read more about this file [here](https://pm2.io/doc/en/runtime/guide/development-tools/).
+Now, you will need to configure an `ecosystem.config.js` file. This file will set `env` variables that connect Strapi to your database. It will also be used to restart your project whenever any changes are made to files within the Strapi file system itself (such as when an update arrived from Github).You can read more about this file [here](https://pm2.io/doc/en/runtime/guide/development-tools/).
 
 - You will need to open your `nano` editor and then `copy/paste` the following:
 
@@ -696,7 +696,7 @@ Digital Ocean calls a virtual private server, a [Droplet](https://www.digitaloce
 
 - Ubuntu 18.04 x64
 - STARTER `Standard`
-- Choose an appropriate pricing plan. For example, pricing: `$5/mo` _(Scroll to the left)_ 
+- Choose an appropriate pricing plan. For example, pricing: `$5/mo` _(Scroll to the left)_
 - Choose a `datacenter` region nearest your audience, for example, `New York`.
 - **OPTIONAL:** Select additional options, for example, `[x] IPv6`.
 - Add your SSH key **NOTE:** We recommend you `add your SSH key` for better security.
@@ -777,9 +777,9 @@ After installing and configuring Git on your Droplet. Please continue to the nex
 
 Digital Ocean has excellent documentation regarding the installation and use of the major databases that work with Strapi. The previous steps above should all be completed prior to continuing. You can find links, and any further instructions, below:
 
-:::: tabs cache-lifetime="10" :options="{ useUrlFragment: false }"
+:::: tabs
 
-::: tab "PostgreSQL" id="postgreSQL-ubuntu"
+::: tab "PostgreSQL"
 
 1. [Install PostgresSQL on Ubuntu 18.04](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-18-04)(Through **Step 4** - Creating a New Database).
 
@@ -817,7 +817,7 @@ You will need the **database name**, **username** and **password** for later use
 ### Local Development Configuration
 
 - You must have [Git installed and set-up locally](https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup).
-- You must have created a repository for your Strapi project and have your development project initilized to this repository.
+- You must have created a repository for your Strapi project and have your development project initialized to this repository.
 
 In your code editor, you will need to edit a file called `database.json`. Replace the contents of the file with the following.
 
@@ -1157,9 +1157,9 @@ If you already have the Heroku CLI installed locally on your computer. Skip to [
 
 Download and install the `Heroku CLI` for your operating system:
 
-:::: tabs cache-lifetime="10" :options="{ useUrlFragment: false }"
+:::: tabs
 
-::: tab "macOS"
+::: tab "Mac O/S"
 [Download the installer](https://cli-assets.heroku.com/heroku.pkg)
 
 Also available via Homebrew:
@@ -1179,7 +1179,7 @@ sudo snap install --classic heroku
 
 :::
 
-::: tab "Windows"
+::: tab "Windows 10"
 Download the appropriate installer for your Windows installation:
 
 [64-bit installer](https://cli-assets.heroku.com/heroku-x64.exe)
@@ -1230,7 +1230,7 @@ Even if it is usually recommended to version this file, it may create issues on 
 
 ### 5. Init a Git repository and commit your project
 
-Init the Git repository and commit yoru project.
+Init the Git repository and commit your project.
 
 `Path: ./my-project/`
 
@@ -1251,7 +1251,7 @@ Create a new Heroku project.
 heroku create
 ```
 
-(You can use `heroku create custom-project-name`, to have Heroku create a `custom-project-name.heroku.com` URL. Otherwise, Heroku will automatically generating a random project name (and URL) for you.)
+(You can use `heroku create custom-project-name`, to have Heroku create a `custom-project-name.heroku.com` URL. Otherwise, Heroku will automatically generate a random project name (and URL) for you.)
 
 ::: warning NOTE
 If you have a Heroku project app already created. You would use the following step to initialize your local project folder:
@@ -1270,9 +1270,9 @@ Your local development environment is now set-up and configured to work with Her
 
 Below you will find database options when working with Heroku. Please choose the correct database (e.g. PostgreSQL, MongoDB, etc.) and follow those instructions.
 
-:::: tabs cache-lifetime="10" :options="{ useUrlFragment: false }"
+:::: tabs
 
-::: tab "PostgreSQL" id="heroku-postgresql"
+::: tab "PostgreSQL"
 
 #### Heroku Postgres
 
@@ -1280,7 +1280,7 @@ Follow these steps to deploy your Strapi app to Heroku using **PostgreSQL**:
 
 ##### 1. Install the [Heroku Postgres addon](https://elements.heroku.com/addons/heroku-postgresql) for using Postgres.
 
-To make things even easier, Heroku provides a powerful addon system. In this section, you are going to use the Heroku Postgres addon, which provides a free "Hobby Dev" plan. If you plan to deploy your app in production, it is highly recommended to switch to a paid plan.
+To make things even easier, Heroku provides a powerful addon system. In this section, you are going to use the Heroku Postgres addon, which provides a free "Hobby Dev" plan. If you plan to deploy your app in production, it is highly recommended switching to a paid plan.
 
 `Path: ./my-project/`
 
@@ -1314,7 +1314,7 @@ heroku config:set DATABASE_PORT=5432
 heroku config:set DATABASE_NAME=d516fp1u21ph7b
 ```
 
-**Note:** Please replace these above values with the your actual values.
+**Note:** Please replace these above values with your actual values.
 
 ##### 4. Update your database config file
 
@@ -1355,7 +1355,7 @@ npm install pg --save
 
 :::
 
-::: tab "MongoDB" id="heroku-mongodb"
+::: tab "MongoDB"
 
 #### MongoDB Atlas
 
@@ -1379,7 +1379,7 @@ heroku config:set DATABASE_PORT=
 heroku config:set DATABASE_NAME=strapi-mongo-heroku
 ```
 
-**Note:** Please replace these above values with the your actual values.
+**Note:** Please replace these above values with your actual values.
 
 ##### 2. Update your database config file
 

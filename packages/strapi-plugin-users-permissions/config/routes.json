@@ -286,6 +286,20 @@
       }
     },
     {
+      "method": "POST",
+      "path": "/auth/send-email-confirmation",
+      "handler": "Auth.sendEmailConfirmation",
+      "config": {
+        "policies": [],
+        "prefix": "",
+        "description": "Send a confirmation email to user",
+        "tag": {
+          "plugin": "users-permissions",
+          "name": "User"
+        }
+      }
+    },
+    {
       "method": "GET",
       "path": "/users",
       "handler": "User.find",
@@ -307,7 +321,7 @@
       "config": {
         "policies": [],
         "prefix": "",
-        "description": "Retrieve the logged in user informations",
+        "description": "Retrieve the logged in user information",
         "tag": {
           "plugin": "users-permissions",
           "name": "User",

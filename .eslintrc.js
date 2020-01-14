@@ -4,9 +4,10 @@ module.exports = {
     'eslint:recommended',
     'plugin:react/recommended',
     'plugin:redux-saga/recommended',
+
     'prettier',
   ],
-  plugins: ['react', 'redux-saga'],
+  plugins: ['react', 'redux-saga', 'react-hooks', 'import'],
   env: {
     browser: true,
     commonjs: true,
@@ -41,10 +42,22 @@ module.exports = {
   rules: {
     'generator-star-spacing': 0,
     'no-console': 0,
+    'require-atomic-updates': 0,
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'warn',
   },
   settings: {
     react: {
       version: '16.5.2',
     },
   },
+  overrides: [
+    {
+      files: ['packages/**/admin/src/**/**/*.js'],
+      rules: {
+        'no-nested-ternary': ['error'],
+        'import/order': 2,
+      },
+    },
+  ],
 };
